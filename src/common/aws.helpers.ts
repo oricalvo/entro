@@ -46,6 +46,14 @@ export async function getAllSecrets(): Promise<string[]> {
     return all;
 }
 
+export async function deleteSecretByARN(arn: string): Promise<void> {
+    const client = new SecretsManager();
+
+    await client.deleteSecret({
+        SecretId: arn
+    });
+}
+
 export async function walkCloudTrailEvents(handler: (event: Event) => Promise<void>, concurrency: number = 10): Promise<void> {
     const cloudTrailClient = new CloudTrail();
 

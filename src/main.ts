@@ -1,8 +1,8 @@
-import {getAllSecrets} from "./common/aws.helpers";
+import {deleteSecretByARN, getAllSecrets} from "./common/aws.helpers";
 import {SecretViolation, ViolationContext} from "./violation";
 import {analyzeLambdas} from "./domains/lambda";
 import {analyzeCloudTrailEvents} from "./domains/cloudTrail";
-import {errorHandler, ExpressApplication, promisifyExpressHandler} from "./common/express.helpers";
+import {errorHandler, ExpressApplication, ExpressRequest, promisifyExpressHandler} from "./common/express.helpers";
 import express from "express";
 import bodyParser from "body-parser";
 import {waitForEvent} from "./common/promise.helpers";
@@ -54,6 +54,16 @@ async function getAllViolations(lambda: boolean, cloudTrail: boolean): Promise<A
     };
 }
 
+async function deleteSecret(req: ExpressRequest) {
+    const body: DeleteSecretRequest = req.body;
+
+    if(!body.arn) {
+        throw new Error("Secret ARN is missing");
+    }
+
+    await deleteSecretByARN(body.arn);
+}
+
 async function configureMiddlewares(app: ExpressApplication) {
     app.use(bodyParser.json({
         limit: "40mb",
@@ -68,6 +78,7 @@ async function configureMiddlewares(app: ExpressApplication) {
 
     app.get("/getcloudtrailsecrets", promisifyExpressHandler(getCloudTrailSecrets));
     app.get("/getexposedsecrets", promisifyExpressHandler(getExposedSecrets));
+    app.post("/deletesecret", promisifyExpressHandler(deleteSecret));
 
     app.use(errorHandler);
 }
@@ -75,6 +86,10 @@ async function configureMiddlewares(app: ExpressApplication) {
 interface AnalyzeViolationResponse {
     violations: SecretViolation[];
     errors: string[];
+}
+
+interface DeleteSecretRequest {
+    arn: string;
 }
 
 main();
