@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "src",
+        "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+        "module": "commonjs",
+        "target": "es2020",
+        "sourceMap": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "declarationMap": true,
+        "composite": true,
+        "forceConsistentCasingInFileNames": true,
+        "experimentalDecorators": true,
+        "noImplicitThis": true,
+        "strictBindCallApply": true
+    },
+    "include": ["src"],
+    "tsBuildInfoFile": "./dist/tsconfig.tsbuildinfo",
+}

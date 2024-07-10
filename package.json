@@ -1,0 +1,26 @@
+{
+	"dependencies": {
+		"@aws-sdk/client-cloudtrail": "^3.613.0",
+		"@aws-sdk/client-lambda": "^3.613.0",
+		"@aws-sdk/client-secrets-manager": "^3.613.0",
+		"@aws-sdk/client-ssm": "^3.613.0",
+		"body-parser": "^1.20.2",
+		"express": "^4.19.2",
+		"express-rate-limit": "^7.3.1",
+		"p-map": "^4.0.0",
+		"unzipper": "^0.12.1"
+	},
+	"devDependencies": {
+		"@types/node": "^20.14.10",
+		"@types/body-parser": "^1.19.5",
+		"@types/express": "^4.17.21",
+		"@types/express-serve-static-core": "^4.19.5",
+		"@types/unzipper": "^0.10.9",
+		"typescript": "^5.5.3"
+	},
+	"scripts": {
+		"build": "tsc -b tsconfig.json",
+		"watch": "tsc -b tsconfig.json -w",
+		"start": "tsc -b tsconfig.json && node dist/main.js"
+	}
+}
