@@ -1,3 +1,3 @@
-Use pnpm to install dependencies: pnpm i
+Use pnpm to install dependencies
 
-Run 'pnpm start'
+Run 'pnpm start' to start the server
