@@ -1,13 +1,10 @@
 import {SecretsManager} from "@aws-sdk/client-secrets-manager";
 import PMap from "p-map";
+import pMap from "p-map";
 import {pushMany} from "./array.helpers";
 import {CloudTrail, Event} from "@aws-sdk/client-cloudtrail";
 import {Lambda} from "@aws-sdk/client-lambda";
 import {GetFunctionResponse} from "@aws-sdk/client-lambda/dist-types/models/models_0";
-import {pipeline} from "stream";
-import {promisify} from "util";
-import pMap from "p-map";
-import {readdirSync} from "node:fs";
 
 export async function getAllSecrets(): Promise<string[]> {
     const all: string[] = [];
@@ -49,7 +46,7 @@ export async function getAllSecrets(): Promise<string[]> {
     return all;
 }
 
-export async function walkCloudTrailEvents(handler: (event: Event)=>Promise<void>, concurrency: number = 10): Promise<void> {
+export async function walkCloudTrailEvents(handler: (event: Event) => Promise<void>, concurrency: number = 10): Promise<void> {
     const cloudTrailClient = new CloudTrail();
 
     let nextToken: string = null;

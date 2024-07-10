@@ -1,4 +1,4 @@
-import {checkViolation, SecretViolation, SecretViolationOrigin, ViolationContext} from "../violation";
+import {checkViolation, SecretViolationOrigin, ViolationContext} from "../violation";
 import {walkCloudTrailEvents} from "../common/aws.helpers";
 
 export async function analyzeCloudTrailEvents(context: ViolationContext): Promise<void> {

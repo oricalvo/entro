@@ -21,8 +21,7 @@ export async function analyzeLambdas(context: ViolationContext): Promise<void> {
 
         try {
             await analyzeLambda(context, func);
-        }
-        catch(err) {
+        } catch (err) {
             context.errors.push(err.message);
         }
     });
